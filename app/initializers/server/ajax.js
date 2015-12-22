@@ -1,3 +1,8 @@
+// which version of ember data are you using? this one looks like 1.11/12?
+
+// need util
+var isNode = typeof isNode === 'undefined' ? false : true;
+
 /*globals najax, Ember*/
 var nodeAjax = function(url, type, options) {
   var adapter = this;
@@ -22,6 +27,8 @@ export default {
   name: 'ajax-service',
 
   initialize: function(application) {
+    if (!isNode) { return; }
+
     application.register('ajax:node', nodeAjax, { instantiate: false });
     application.inject('adapter', 'ajax', 'ajax:node');
   }

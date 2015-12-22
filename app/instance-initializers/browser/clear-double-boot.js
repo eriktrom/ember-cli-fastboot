@@ -9,10 +9,15 @@
 // This removes any pre-rendered ember-view elements, so that the booting
 // application will replace the pre-rendered output
 
+// need util
+var isNode = typeof isNode === 'undefined' ? false : true;
+
 export default {
   name: "clear-double-boot",
 
   initialize: function(instance) {
+    if (isNode) { return; }
+
     var originalDidCreateRootView = instance.didCreateRootView;
 
     instance.didCreateRootView = function() {
